@@ -52,8 +52,8 @@
   <script src="/socket.io/socket.io.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
   <script>
+    var socket = io();
     $(function() {
-      var socket = io();
       $('form').submit(function(e) {
         e.preventDefault(); // prevents page reloading
         socket.emit('chat message', $('#m').val());
@@ -64,6 +64,9 @@
     socket.on('chat message', function(msg) {
       $('#messages').append($('<li>').text(msg));
       window.scrollTo(0, document.body.scrollHeight);
+    });
+    socket.on('rfid', function(data) {
+      alert(`Rfid code: ${data}`);
     });
   </script>
 </html>
